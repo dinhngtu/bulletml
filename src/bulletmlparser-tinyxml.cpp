@@ -75,5 +75,3 @@ void BulletMLParserTinyXML::parse() {
     doc.LoadFile();
 	parseImpl(doc);
 }
-
-

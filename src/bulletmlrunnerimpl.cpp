@@ -57,7 +57,7 @@ double BulletMLRunnerImpl::getDirection(BulletMLNode* dirNode,
     }
 
     if (isDefault) {
-		// –¾‚ç‚©‚É”ñŒø—¦
+		// æ˜Žã‚‰ã‹ã«éžåŠ¹çŽ‡
 		dir += runner_->getAimDirection();
     }
 
@@ -85,7 +85,7 @@ double BulletMLRunnerImpl::getSpeed(BulletMLNode* spdNode) {
 		}
     }
 
-    // ƒfƒtƒHƒ‹ƒg‚Å‚Í‰½‚à‚µ‚È‚¢
+    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯ä½•ã‚‚ã—ãªã„
 
     prevSpd_ = spd;
 
@@ -203,13 +203,13 @@ void BulletMLRunnerImpl::changes() {
 }
 
 void BulletMLRunnerImpl::runSub() {
-	// Œ©‚½‚­‚à‚È‚¢ƒR[ƒh‚¾‚ËB
+	// è¦‹ãŸãã‚‚ãªã„ã‚³ãƒ¼ãƒ‰ã ã­ã€‚
 	while (act_ != 0 && !isTurnEnd()) {
 		BulletMLNode* prev = act_;
 		Method fp = commandMap_[act_->getName()];
 		(this->*fp)();
 
-		// ref ‚©‚ç–ß‚é
+		// ref ã‹ã‚‰æˆ»ã‚‹
 		if (act_ == 0 &&
 			prev->getParent() != 0 &&
 			prev->getParent()->getName() == BulletMLNode::bulletml)
@@ -220,10 +220,10 @@ void BulletMLRunnerImpl::runSub() {
 			refStack_.pop();
 		}
 
-		// ŽŸ‚Ì node ‚ð’T‚·
+		// æ¬¡ã® node ã‚’æŽ¢ã™
 		if (act_ == 0) act_ = prev->next();
 
-		// ã‚É‘k‚Á‚ÄŽŸ‚Ì node ‚ð’T‚·
+		// ä¸Šã«é¡ã£ã¦æ¬¡ã® node ã‚’æŽ¢ã™
 		while (act_ == 0) {
 			if (prev->getParent() != 0 &&
 				prev->getParent()->getName() == BulletMLNode::repeat)
@@ -266,7 +266,7 @@ void BulletMLRunnerImpl::run() {
 
 	endTurn_ = runner_->getTurn();
 
-	// ÅŒã‚Ì wait, changeŒn‚ð‘Ò‚Â‚¾‚¯
+	// æœ€å¾Œã® wait, changeç³»ã‚’å¾…ã¤ã ã‘
 	if (act_ == 0) {
 		if (!isTurnEnd()) {
 			if (changeDir_.get() == 0 && changeSpeed_.get() == 0 &&
@@ -424,7 +424,7 @@ void BulletMLRunnerImpl::runChangeSpeed() {
 		spd = getNumberContents(spdNode) * (double)term
 			+ runner_->getBulletSpeed();
 	}
-	
+
 
 	calcChangeSpeed(spd, term);
 
@@ -468,7 +468,7 @@ void BulletMLRunnerImpl::calcChangeDirection(double direction, int term,
 	else {
 		double dirSpace;
 
-		// ‚¿‚á‚ñ‚Æ‹ß‚¢•û‚ð‰ñ‚Á‚Ä‚¢‚­‚Ì‚ÍŒ‹\“ï‚µ‚¢‚Ë
+		// ã¡ã‚ƒã‚“ã¨è¿‘ã„æ–¹ã‚’å›žã£ã¦ã„ãã®ã¯çµæ§‹é›£ã—ã„ã­
 		double dirSpace1 = direction - dirFirst;
 		double dirSpace2;
 		if (dirSpace1 > 0) dirSpace2 = dirSpace1 - 360;
@@ -552,7 +552,7 @@ BulletMLRunnerImpl::Parameters* BulletMLRunnerImpl::getParameters() {
 		if (first) {
 			first = false;
 			para = new Parameters;
-			// 0”Ô—v‘f‚ÍŽg‚í‚È‚¢
+			// 0ç•ªè¦ç´ ã¯ä½¿ã‚ãªã„
 			para->push_back(0);
 		}
 
@@ -561,5 +561,3 @@ BulletMLRunnerImpl::Parameters* BulletMLRunnerImpl::getParameters() {
 
 	return para;
 }
-
-	

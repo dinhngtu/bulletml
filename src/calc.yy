@@ -1,6 +1,4 @@
-/* Ãæ´Öµ­Ë¡ÅÅÂî -- calc */
-
-%{
+/* ï¾ƒè±¢ï¾–ï½µï½­ï¾‹ï½¡ï¾…ï¾…ï¾‚
 typedef double NumType;
 
 #define YYSTYPE double

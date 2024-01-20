@@ -85,4 +85,3 @@ std::string BulletMLParserYggdrasil::trimString(const std::string& str) {
 
 	return ret;
 }
-

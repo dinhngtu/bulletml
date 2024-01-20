@@ -117,4 +117,3 @@ void BulletMLNode::getAllChildrenVec(Name name, std::vector<BulletMLNode*>& outv
 		if ((*ite)->getName() == name) outvec.push_back(*ite);
 	}
 }
-
