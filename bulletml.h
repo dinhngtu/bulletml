@@ -1,21 +1,21 @@
 
-// �ȉ��� ifdef �u���b�N�� DLL ����ȒP�ɃG�N�X�|�[�g������}�N�����쐬����W���I�ȕ��@�ł��B 
-// ���� DLL ���̂��ׂẴt�@�C���̓R�}���h���C���Œ�`���ꂽ BULLETML_EXPORTS �V���{��
-// �ŃR���p�C������܂��B���̃V���{���͂��� DLL ���g�p����ǂ̃v���W�F�N�g��ł�����`�łȂ�
-// ��΂Ȃ�܂���B���̕��@�ł̓\�[�X�t�@�C���ɂ��̃t�@�C�����܂ނ��ׂẴv���W�F�N�g�� DLL 
-// ����C���|�[�g���ꂽ���̂Ƃ��� BULLETML_API �֐����Q�Ƃ��A���̂��߂��� DLL �͂��̃}�N 
-// ���Œ�`���ꂽ�V���{�����G�N�X�|�[�g���ꂽ���̂Ƃ��ĎQ�Ƃ��܂��B
+// 以下の ifdef ブロックは DLL から簡単にエクスポートさせるマクロを作成する標準的な方法です。 
+// この DLL 内のすべてのファイルはコマンドラインで定義された BULLETML_EXPORTS シンボル
+// でコンパイルされます。このシンボルはこの DLL が使用するどのプロジェクト上でも未定義でなけ
+// ればなりません。この方法ではソースファイルにこのファイルを含むすべてのプロジェクトが DLL 
+// からインポートされたものとして BULLETML_API 関数を参照し、そのためこの DLL はこのマク 
+// ロで定義されたシンボルをエクスポートされたものとして参照します。
 #ifdef BULLETML_EXPORTS
 #define BULLETML_API __declspec(dllexport)
 #else
 #define BULLETML_API __declspec(dllimport)
 #endif
 
-// ���̃N���X�� bulletml.dll ����G�N�X�|�[�g����܂�
+// このクラスは bulletml.dll からエクスポートされます
 class BULLETML_API CBulletml {
 public:
 	CBulletml(void);
-	// TODO: ���̈ʒu�Ƀ��\�b�h��ǉ����Ă��������B
+	// TODO: この位置にメソッドを追加してください。
 };
 
 extern BULLETML_API int nBulletml;

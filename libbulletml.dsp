@@ -1,25 +1,25 @@
 # Microsoft Developer Studio Project File - Name="libbulletml" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
-# ** �ҏW���Ȃ��ł������� **
+# ** 編集しないでください **
 
 # TARGTYPE "Win32 (x86) Static Library" 0x0104
 
 CFG=libbulletml - Win32 Debug
-!MESSAGE ����͗L����Ҳ�̧�قł͂���܂���B ������ۼު�Ă�����ނ��邽�߂ɂ� NMAKE ���g�p���Ă��������B
-!MESSAGE [Ҳ�̧�ق̴���߰�] ����ނ��g�p���Ď��s���Ă�������
-!MESSAGE 
+!MESSAGE これは有効なﾒｲｸﾌｧｲﾙではありません。 このﾌﾟﾛｼﾞｪｸﾄをﾋﾞﾙﾄﾞするためには NMAKE を使用してください。
+!MESSAGE [ﾒｲｸﾌｧｲﾙのｴｸｽﾎﾟｰﾄ] ｺﾏﾝﾄﾞを使用して実行してください
+!MESSAGE
 !MESSAGE NMAKE /f "libbulletml.mak".
-!MESSAGE 
-!MESSAGE NMAKE �̎��s���ɍ\�����w��ł��܂�
-!MESSAGE ����� ײݏ��ϸۂ̐ݒ���`���܂��B��:
-!MESSAGE 
+!MESSAGE
+!MESSAGE NMAKE の実行時に構成を指定できます
+!MESSAGE ｺﾏﾝﾄﾞ ﾗｲﾝ上でﾏｸﾛの設定を定義します。例:
+!MESSAGE
 !MESSAGE NMAKE /f "libbulletml.mak" CFG="libbulletml - Win32 Debug"
-!MESSAGE 
-!MESSAGE �I���\������� Ӱ��:
-!MESSAGE 
-!MESSAGE "libbulletml - Win32 Release" ("Win32 (x86) Static Library" �p)
-!MESSAGE "libbulletml - Win32 Debug" ("Win32 (x86) Static Library" �p)
-!MESSAGE 
+!MESSAGE
+!MESSAGE 選択可能なﾋﾞﾙﾄﾞ ﾓｰﾄﾞ:
+!MESSAGE
+!MESSAGE "libbulletml - Win32 Release" ("Win32 (x86) Static Library" 用)
+!MESSAGE "libbulletml - Win32 Debug" ("Win32 (x86) Static Library" 用)
+!MESSAGE
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
@@ -74,7 +74,7 @@ LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
 # ADD LIB32 /nologo
 
-!ENDIF 
+!ENDIF
 
 # Begin Target
 

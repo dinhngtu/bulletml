@@ -1,4 +1,4 @@
-// bulletml.cpp : DLL �A�v���P�[�V�����p�̃G���g�� �|�C���g���`���܂��B
+// bulletml.cpp : DLL アプリケーション用のエントリ ポイントを定義します。
 //
 
 #include "stdafx.h"
@@ -21,17 +21,17 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 }
 
 
-// ����̓G�N�X�|�[�g���ꂽ�ϐ��̗�ł��B
+// これはエクスポートされた変数の例です。
 BULLETML_API int nBulletml=0;
 
-// ����̓G�N�X�|�[�g���ꂽ�֐��̗�ł��B
+// これはエクスポートされた関数の例です。
 BULLETML_API int fnBulletml(void)
 {
 	return 42;
 }
 
-// ����̓G�N�X�|�[�g���ꂽ�N���X�̃R���X�g���N�^�ł��B
-// �N���X�̒�`�ɂ��Ă� bulletml.h ���Q�Ƃ��Ă��������B
+// これはエクスポートされたクラスのコンストラクタです。
+// クラスの定義については bulletml.h を参照してください。
 CBulletml::CBulletml()
 { 
 	return; 

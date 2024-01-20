@@ -1,177 +1,177 @@
 libBulletML 0.0.5
 
-�E�T�v
+・概要
 
-�e���L�q���� BulletML ������ c++ ���C�u�����ł��B
-�����p���邱�Ƃɂ���āA�L�x�ȋL�q�͂����� BulletML ���A
-XML��͂̒m�����Ȃ��Ă����p���邱�Ƃ��ł��܂��B
+弾幕記述言語 BulletML を扱う c++ ライブラリです。
+これを用いることによって、豊富な記述力を持つ BulletML を、
+XML解析の知識がなくても利用することができます。
 
-�O���t�B�b�N�Ȃǂ̃Q�[���̑��̕����Ƃ͊��S�ɐ؂蕪�����Ă���̂ŁA
-���S���Ăǂ�ȃ\�t�g�ɂł��g�p���邱�Ƃ��ł��܂��B
+グラフィックなどのゲームの他の部分とは完全に切り分けられているので、
+安心してどんなソフトにでも使用することができます。
 
-�v���O�����ɖ��ߍ��܂ꂽ�e���L�q�ɔ�ׂ�ƒx���Ǝv���܂����A
-��͎��ɑS�Ă̗v�f�� enum �����Ă��邽�߁A
-���s���̕������r�Ȃǂɂ�鑬�x�ቺ�͋N����܂���B
+プログラムに埋め込まれた弾幕記述に比べると遅いと思われますが、
+解析時に全ての要素を enum 化しているため、
+実行時の文字列比較などによる速度低下は起こりません。
 
-BulletML �� ABA���񂪃f�U�C�������e���L�q����ł��B
-�ڂ����͂�������ǂ����B
-http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index.html
+BulletML は ABAさんがデザインした弾幕記述言語です。
+詳しくはこちらをどうぞ。
+http://www.asahi-net.or.jp/‾cs8k-cyu/bulletml/index.html
 
-�E�g����
+・使い方
 
-VC �� Borland C++ �� gcc �œ���m�F����Ă��܂��B
+VC と Borland C++ と gcc で動作確認されています。
 
-���̃h�L�������g�͑������������Ȃ̂ŁA�킩��Ȃ����Ƃ�����΁A
-�ٍ�u�����e������v�����S�Ȏ��p��ƂȂ��Ă��܂��B
-���ȓG�e�̑��삪 command.cc, command.h �Ƃ���
-�Z���v���O�����Ɏ��܂��Ă���̂��킩�邩�Ǝv���܂��B
-���ɎQ�l�ɂ���Ɨǂ������ɂ� enemy.cc, enemy.h ������܂��B
-�܂��Ahtml/index.html ���ȒP�� API ���t�@�����X�ɂȂ邩������܂���B
+このドキュメントは多少いい加減なので、わからないことがあれば、
+拙作「白い弾幕くん」が完全な実用例となっています。
+厄介な敵弾の操作が command.cc, command.h という
+短いプログラムに収まっているのがわかるかと思います。
+他に参考にすると良い部分には enemy.cc, enemy.h があります。
+また、html/index.html が簡単な API リファレンスになるかもしれません。
 
-���̃��C�u�����͓��ނ̎g�������z�肳��Ă��܂��B
+このライブラリは二種類の使い方が想定されています。
 
-* ��ځA�C�x���g�쓮�^
+* 一つ目、イベント駆動型
 
-������̕����ȒP�Ȏg�����ł��B
-�����A�����Z�ʂ������Ȃ�����������̂���_�ł��B
+こちらの方が簡単な使い方です。
+ただ、少し融通が利かない部分があるのが難点です。
 
-0. BulletML �ŋL�q���ꂽ XML �t�@�C����p�ӂ��܂��B
+0. BulletML で記述された XML ファイルを用意します。
 
-�n�߂́u�����e������v�� ABA����� XML �t�@�C����p����Ηǂ��ł��傤�B
-�܂��AREADME.bulletml �Ƀ��t�@�����X������܂��B
+始めは「白い弾幕くん」や ABAさんの XML ファイルを用いれば良いでしょう。
+また、README.bulletml にリファレンスがあります。
 
-1. �K�v�ȃt�@�C�����C���N���[�h���܂��B
+1. 必要なファイルをインクルードします。
 
 #include "bulletml/bulletmlparser.h"
 #include "bulletml/bulletmlparser-tinyxml.h"
 #include "bulletml/bulletmlrunner.h"
 
-2. BulletMLRunner ���p�������N���X���쐬���܂��B
+2. BulletMLRunner を継承したクラスを作成します。
 
 class BulletCommand : public BulletMLRunner {
     // ...
 
-	// ���̃N���X�͑��삷�� Bullet �ƂȂ�炩�̎�i�Ŋ֘A�t���邱�ƁB
+	// このクラスは操作する Bullet となんらかの手段で関連付けること。
     Bullet* bullet_;
 }
 
-3. bulletmlrunner.h �ɋL�q����Ă��鏃�����z�֐���S�Ď������܂��B
+3. bulletmlrunner.h に記述されている純粋仮想関数を全て実装します。
 
-�Ⴆ�΁A�ȉ��̂悤�ɂ��܂��B
+例えば、以下のようにします。
 virtual void doVanish() {
 	bullet->die();
 }
 
-���ӂ��ׂ��_�͈�_�����ł��B
-����� create �Ŏn�܂��̃��\�b�h�̃I�[�o�[���C�h�ɂ��Ăł��B
+注意すべき点は一点だけです。
+それは create で始まる二つのメソッドのオーバーライドについてです。
 
-libBulletML �ł�<action> �����e�Ǝ����Ȃ��e�̓�ɕ��ނ���܂��B
-<action> �������Ȃ��e�͓����^�����s�������Ȃ̂ŁA
-�V���v���Ɏ����������������ɂȂ邱�Ƃ����҂���邽�߁A
-���̂悤�ȕ��ނ��s���Ă��܂��B
-�N���C�A���g�R�[�h�ł��A���̓�͋�ʂ��������ǂ��Ǝv���܂��B
-�u�����e������v�ł� Shot �� Enemy �Ƃ�����̃N���X��p���Ă��܂��B
+libBulletML では<action> を持つ弾と持たない弾の二つに分類されます。
+<action> を持たない弾は等速運動を行うだけなので、
+シンプルに実装した方が高速になることが期待されるため、
+このような分類を行っています。
+クライアントコードでも、この二つは区別した方が良いと思われます。
+「白い弾幕くん」では Shot と Enemy という二つのクラスを用いています。
 
-���āA<action> �������Ȃ��e���쐬���� <fire> �G�������g�����s����ƁA
-BulletMLRunner �� createSimpleBullet ���Ăяo���܂��B
-����͊p�x�Ƒ��x���n����Ă���̂ŁA����ɏ]�����e���쐬���܂��B
+さて、<action> を持たない弾を作成する <fire> エレメントを実行すると、
+BulletMLRunner は createSimpleBullet を呼び出します。
+これは角度と速度が渡されているので、それに従った弾を作成します。
 
-<action> �����ꍇ�A����̗�ɉ����āA
-BulletMLState* state �Ƃ����I�u�W�F�N�g���n����܂��B
-����́ABulletML �̃p�[�X���̏����c�����߂̂��̂ŁA
-�N���C�A���g�R�[�h�ł��̓��e���C�ɂ���K�v�͂���܂���B
-�����A�V�������܂ꂽ�e�� BulletMLRunner �h���N���X��
-���Ƃ��ɂ����n���K�v������܂��B
-BulletMLRunner �̐����ɂ��Ă͎��̍��Ő������܂��B
+<action> を持つ場合、先程の例に加えて、
+BulletMLState* state というオブジェクトが渡されます。
+これは、BulletML のパース中の情報を残すためのもので、
+クライアントコードでこの内容を気にする必要はありません。
+ただ、新しく生まれた弾の BulletMLRunner 派生クラスを
+作るときにこれを渡す必要があります。
+BulletMLRunner の生成については次の項で説明します。
 
-4. BulletMLRunner �h���N���X�̐���
+4. BulletMLRunner 派生クラスの生成
 
-libBulletML �ł͒e���͓��ނɕ��ނ���܂��B
-����́Axml�t�@�C���̃h�L�������g�S�Ă������Đ�������A
-�S�Ă̒e�̌��ƂȂ�ꎟ�e���ƁA
-���̒e������ <action> ������ <fire> �G�������g�ɂ���č쐬���ꂽ�A
-�񎟎O���c�e���ł��B
+libBulletML では弾源は二種類に分類されます。
+これは、xmlファイルのドキュメント全てを持って生成され、
+全ての弾の源となる一次弾源と、
+他の弾源から <action> を持つ <fire> エレメントによって作成された、
+二次三次…弾源です。
 
-���̈Ⴂ����ABulletMLRunner �h���N���X��
-�Œ��̃R���X�g���N�^��p�ӂ���K�v������܂��B
+この違いから、BulletMLRunner 派生クラスは
+最低二つのコンストラクタを用意する必要があります。
 
-�O�҂̃R���X�g���N�^�͗Ⴆ�Έȉ��̂悤�Ɏ������܂��B
+前者のコンストラクタは例えば以下のように実装します。
 BulletCommand::BulletCommand(BulletMLParser* bp, Bullet* b)
     : BulletMLRunner(bp), bullet_(b)
 
-��҂̃R���X�g���N�^�͗Ⴆ�Έȉ��̂悤�Ɏ������܂��B
+後者のコンストラクタは例えば以下のように実装します。
 BulletCommand::BulletCommand(BulletMLState* bs, Bullet* b)
     : BulletMLRunner(bs), bullet_(b)
 
-5. BulletML �h�L�������g�𐶐����܂��B
+5. BulletML ドキュメントを生成します。
 
 BulletMLParser* bp = new BulletMLParserTinyXML("hoge.xml");
 bp->build();
 
-���̍�Ƃ͎��ۂ̎��s���ɍs���ɂ͏d���̂ŁA
-�v���O�����̊J�n���Ȃǂɂ܂Ƃ߂ēǂ݂��ނ��Ƃ������߂��܂��B
+この作業は実際の実行時に行うには重いので、
+プログラムの開始時などにまとめて読みこむことをお勧めします。
 
-6. ����̃h�L�������g��p�����ꎟ�e���𐶐����܂��B
+6. 先程のドキュメントを用いた一次弾源を生成します。
 
 BulletCommand* bc = new BulletCommand(bp)
 
-7. �e�^�[���ɑS�Ă� BulletCommand �����s���܂��B
+7. 各ターンに全ての BulletCommand を実行します。
 
 bc->run();
 
-���ꂾ���ŁA��̓C�x���g�쓮���Œe�̏�ԕω����Ăт����Ă���܂��B
+これだけで、後はイベント駆動式で弾の状態変化を呼びだしてくれます。
 
-�܂��A������肪�N�������ꍇ�AlibBulletML �� BulletMLError �𓊂��܂��B
-�⑫����ƕ֗��Ȃ��Ƃ�����ł��傤�B
+また、何か問題が起こった場合、libBulletML は BulletMLError を投げます。
+補足すると便利なこともあるでしょう。
 
-* ��ځA���͂Ńc���[���
+* 二つ目、自力でツリー解析
 
-������͂��܂�z�肳��Ă��Ȃ��g�����ł����A����Ȃ�̉��b�͂���܂��B
+こちらはあまり想定されていない使い方ですが、それなりの恩恵はあります。
 
-1. �K�v�ȃt�@�C���̃C���N���[�h�����܂��B
+1. 必要なファイルのインクルードをします。
 
 #include "bulletml/bulletmlparser.h"
 #include "bulletml/bulletmlparser-tinyxml.h"
 #include "bulletml/bulletmltree.h"
 
-2. BulletML �h�L�������g�𐶐����܂��B
+2. BulletML ドキュメントを生成します。
 
 BulletMLParser* bp = new BulletMLParserTinyXML("hoge.xml");
 bp->build();
 
-3. BulletMLParser ����g�b�v�̃A�N�V�������擾���܂��B
+3. BulletMLParser からトップのアクションを取得します。
 
 const std::vector<BulletMLNode*>& nodes = bp->getTopActions();
 
-4. ���͂Ńc���[����͂��܂��B
+4. 自力でツリーを解析します。
 
-bulletmltree.h �����Q�l�Ƀc���[����͂��ēG�e�𓮂����Ă��������B
+bulletmltree.h 内を参考にツリーを解析して敵弾を動かしてください。
 
-�E���낢��
+・いろいろ
 
-����ȋ@�\���~�����Ƃ�����΃��[�����肢���܂��B
+こんな機能が欲しいとかあればメールお願いします。
 
-�C��BSD���C�Z���X�ɏ]���܂��B
+修正BSDライセンスに従います。
 
-TinyXML�ɂ����b�ɂȂ��Ă��܂��B
+TinyXMLにお世話になっています。
 http://www.gibaradunn.srac.org/tiny/index.shtml
 
-�h�L�������g������ Doxygen ��p���Ă��܂��B
-http://www.stack.nl/~dimitri/doxygen/
+ドキュメント生成に Doxygen を用いています。
+http://www.stack.nl/‾dimitri/doxygen/
 
-�EToDo
+・ToDo
 
-1. �d�l�Ƃ̐���
-�E<horizontal><vertical>��attribute
+1. 仕様との整合
+・<horizontal><vertical>のattribute
 
-2. �Ǝ��̊g�������₷��
-�E���d�l�ɂȂ��^�O��A�g���r���[�g�Ή�
+2. 独自の拡張をしやすく
+・元仕様にないタグやアトリビュート対応
 
-3. �G���[���b�Z�[�W�A�G���[�𓊂����ʂ̏[��
+3. エラーメッセージ、エラーを投げる場面の充実
 
-4. �e�������肵�₷���B
+4. 各種情報を入手しやすく。
 
-�E�C��BSD���C�Z���X
+・修正BSDライセンス
 
 Copyright (c) 2003, shinichiro.h All rights reserved.
 
