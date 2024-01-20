@@ -8,18 +8,14 @@
 
 #ifdef USE_XERCES
 
-#include <string>
-
 class BulletMLParserXerces : public BulletMLParser {
 public:
-    explicit BulletMLParserXerces(const std::string& filename);
+    explicit BulletMLParserXerces(const char* filename);
     virtual ~BulletMLParserXerces();
 
     virtual void parse();
 
 private:
-    std::string xmlFile_;
-
 	friend class BulletMLParserXercesSAXHandler;
 };
 

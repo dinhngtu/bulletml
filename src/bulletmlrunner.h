@@ -11,7 +11,7 @@
 #include "bulletmlcommon.h"
 
 #include <vector>
-#include <boost/smart_ptr.hpp>
+#include <tr1/memory>
 
 class BulletMLParser;
 class BulletMLNode;
@@ -24,17 +24,17 @@ class BulletMLState {
 public:
 	DECLSPEC BulletMLState(BulletMLParser* bulletml,
 						   const std::vector<BulletMLNode*>& node,
-						   boost::shared_ptr<BulletMLParameter> para)
+						   std::tr1::shared_ptr<BulletMLParameter> para)
 		: bulletml_(bulletml), node_(node.begin(), node.end()), para_(para) {}
 
 	DECLSPEC BulletMLParser* getBulletML() { return bulletml_; }
 	DECLSPEC const std::vector<BulletMLNode*>& getNode() const { return node_; }
-	DECLSPEC boost::shared_ptr<BulletMLParameter> getParameter() { return para_; }
+	DECLSPEC std::tr1::shared_ptr<BulletMLParameter> getParameter() { return para_; }
 
 private:
 	BulletMLParser* bulletml_;
 	std::vector<BulletMLNode*> node_;
-	boost::shared_ptr<BulletMLParameter> para_;
+	std::tr1::shared_ptr<BulletMLParameter> para_;
 
 };
 

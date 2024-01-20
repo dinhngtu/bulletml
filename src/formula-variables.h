@@ -33,7 +33,7 @@ public:
 template <typename Val_>
 class Param : public AbstractNumber<Val_> {
 public:
-	DECLSPEC explicit Param(int id) : id_(id) {}
+	DECLSPEC explicit Param(unsigned int id) : id_(id) {}
 	DECLSPEC virtual Val_ value() const {
 		if (Variables::parameters && id_ < Variables::parameters->size()) {
 			return (*Variables::parameters)[id_];
@@ -44,7 +44,7 @@ public:
 	}
 
 private:
-	int id_;
+	unsigned int id_;
 };
 
 #endif // ! FORMULA_VARIABLE_H_

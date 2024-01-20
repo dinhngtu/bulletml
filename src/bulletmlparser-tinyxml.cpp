@@ -5,8 +5,8 @@
 
 #include <string>
 
-BulletMLParserTinyXML::BulletMLParserTinyXML(const std::string& filename)
-    : xmlFile_(filename), curNode_(0)
+BulletMLParserTinyXML::BulletMLParserTinyXML(const char* filename)
+    : curNode_(0)
 {
 	setName(filename);
 }
@@ -71,7 +71,7 @@ void BulletMLParserTinyXML::parseImpl(TiXmlDocument& doc) {
 }
 
 void BulletMLParserTinyXML::parse() {
-    TiXmlDocument doc(xmlFile_.c_str());
+    TiXmlDocument doc(name_);
     doc.LoadFile();
 	parseImpl(doc);
 }

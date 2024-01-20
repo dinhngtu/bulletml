@@ -19,9 +19,9 @@ public:
 	BulletMLParserXercesSAXHandler(BulletMLParserXerces* parser);
 
 	virtual void characters(const XMLCh* const chars,
-											  const unsigned int length);
+							const unsigned int length);
 	virtual void startElement(const XMLCh* const name,
-												AttributeList& attributes);
+							  AttributeList& attributes);
 	virtual void endElement(const XMLCh* const name);
 
 	virtual void error(const SAXParseException& e) {
@@ -94,8 +94,7 @@ void BulletMLParserXercesSAXHandler::endElement(const XMLCh* const) {
 	curNode_ = curNode_->getParent();
 }
 
-BulletMLParserXerces::BulletMLParserXerces(const std::string& filename)
-    : xmlFile_(filename)
+BulletMLParserXerces::BulletMLParserXerces(const char* filename)
 {
 	setName(filename);
 }
@@ -117,7 +116,7 @@ void BulletMLParserXerces::parse() {
 		parser->setDocumentHandler(&handler);
 		parser->setErrorHandler(&handler);
 
-		parser->parse(xmlFile_.c_str());
+		parser->parse(name_);
 
 		parser.reset(0);
 	}

@@ -24,7 +24,7 @@ public:
 	void catch_text(yggdrasil::ygg_node text);
 
 public:
-    DECLSPEC explicit BulletMLParserYggdrasil(const std::string& filename);
+    DECLSPEC explicit BulletMLParserYggdrasil(const char* filename);
     DECLSPEC virtual ~BulletMLParserYggdrasil();
 
     DECLSPEC virtual void parse();
@@ -33,7 +33,6 @@ protected:
 	std::string trimString(const std::string& str);
 
 private:
-    std::string xmlFile_;
     class BulletMLNode* curNode_;
 };
 

@@ -16,12 +16,12 @@ class BulletMLNode;
 
 class BulletMLParserTinyXML : public BulletMLParser {
 public:
-    DECLSPEC BulletMLParserTinyXML(const std::string& filename);
+    DECLSPEC BulletMLParserTinyXML(const char* filename);
     DECLSPEC virtual ~BulletMLParserTinyXML();
 
     DECLSPEC virtual void parse();
 
-protected:
+private:
 	void parseImpl(TiXmlDocument& doc);
 
 protected:
@@ -29,7 +29,6 @@ protected:
     void translateNode(TiXmlNode* node);
 
 private:
-    std::string xmlFile_;
     BulletMLNode* curNode_;
 };
 

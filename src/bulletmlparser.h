@@ -70,11 +70,10 @@ protected:
     bool isHorizontal_;
 
 protected:
-	/// 一時的な導入
-	void setName(const std::string& name) { name_ = name; }
-	std::string name_;
+	void setName(const char* name) { name_ = name; }
+	const char* name_;
 public:
-	DECLSPEC const std::string& getName() const { return name_; }
+	DECLSPEC const char* getName() const { return name_; }
 
 };
 

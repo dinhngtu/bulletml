@@ -63,8 +63,8 @@ void BulletMLParserYggdrasil::catch_text(yggdrasil::ygg_node text) {
 	curNode_->setValue(trimString(text.get_text()));
 }
 
-BulletMLParserYggdrasil::BulletMLParserYggdrasil(const std::string& filename)
-    : xmlFile_(filename), curNode_(0)
+BulletMLParserYggdrasil::BulletMLParserYggdrasil(const char* filename)
+    : curNode_(0)
 {
 	setName(filename);
 }
@@ -72,7 +72,8 @@ BulletMLParserYggdrasil::BulletMLParserYggdrasil(const std::string& filename)
 BulletMLParserYggdrasil::~BulletMLParserYggdrasil() {}
 
 void BulletMLParserYggdrasil::parse() {
-	sox_file(xmlFile_).read(this);
+	std::string f(name_);
+	sox_file(f).read(this);
 }
 
 std::string BulletMLParserYggdrasil::trimString(const std::string& str) {
