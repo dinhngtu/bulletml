@@ -375,5 +375,6 @@ int main() {
 
 /******************************************************************************
 	□■□■                  Wraith the Trickster                  □■□■
-	■□■□ 〜I'll go with heaven's advantage and fool's wisdom.〜 ■□■□
+	■□■□ ～I'll go with heaven's advantage and fool's wisdom.～ ■□■□
 ******************************************************************************/
+

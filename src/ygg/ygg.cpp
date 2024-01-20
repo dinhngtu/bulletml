@@ -1106,23 +1106,21 @@ ygg_reverse_iterator ygg_list::rend() {
 	return ygg_reverse_iterator(get_shell(), body.rend());			//	return
 }
 ygg_const_iterator ygg_list::begin() const {
-	return ygg_const_const int ygg_list::get_size() const {
-	return body.size();												//	return
+	return ygg_const_iterator(get_shell(), body.begin());			//	return
 }
-ygg_iterator ygg_list::begin() {
-	return ygg_iterator(this, body.begin());						//	return
+ygg_const_iterator ygg_list::end() const {
+	return ygg_const_iterator(get_shell(), body.end());				//	return
 }
-ygg_iterator ygg_list::end() {
-	return ygg_iterator(this, body.end());							//	return
+ygg_const_reverse_iterator ygg_list::rbegin() const {
+	return ygg_const_reverse_iterator(get_shell(), body.rbegin());	//	return
 }
-ygg_reverse_iterator ygg_list::rbegin() {
-	return ygg_reverse_iterator(get_shell(), body.rbegin());		//	return
+ygg_const_reverse_iterator ygg_list::rend() const {
+	return ygg_const_reverse_iterator(get_shell(), body.rend());	//	return
 }
-ygg_reverse_iterator ygg_list::rend() {
-	return ygg_reverse_iterator(get_shell(), body.rend());			//	return
-}
-ygg_const_iterator ygg_list::begin() const {
-	return ygg_const_はず。どっかにバグにがあると思われる。", false));
+
+bool ygg_list::match_path(const ygg_string &path) const {
+	assert(false);
+	//assert(("ygg_list::match_path が呼ばれるようなことはないはず。どっかにバグにがあると思われる。", false));
 	return
 		path == ygg_term::node ||
 		path == ygg_term::list_node;								//	return
@@ -1886,7 +1884,7 @@ xml_parser & xml_parser::parse_string(const ygg_string &X_text) {
 				if (!lead_sign && !trail_sign &&
 					p_lead_sign == element_string.find("?", p_lead_sign) &&
 					p_trail_sign == element_string.find("?", p_trail_sign)) {
-				//	<?〜?> ...
+				//	<?～?> ...
 #					ifdef __REJECT_PROCESSING_INSTRUCTION__
 						//	読み飛ばし
 						continue;									//	continue
@@ -2019,5 +2017,6 @@ xml_parser & xml_parser::end_stream() {
 
 /******************************************************************************
 	□■□■                  Wraith the Trickster                  □■□■
-	■□■□ 〜I'll go with heaven's advantage and fool's wisdom.〜 ■□■□
+	■□■□ ～I'll go with heaven's advantage and fool's wisdom.～ ■□■□
 ******************************************************************************/
+

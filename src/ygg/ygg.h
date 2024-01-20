@@ -1228,29 +1228,31 @@ class ygg_proto_list :public ygg_node_body {
 	ygg_proto_list * exile_child(ygg_node X_node);
 
 #ifdef _DEBUG
-	bool assert_othere_body;
+	bool assert_other(const ygg_node &X) const;
+#endif
+
+inline	ygg_node get_single() {
+			return operator[](0);
+		}
+
+};
+class ygg_list :public ygg_proto_list {
 
   protected:
-	ygg_list_type	body;
+	ygg_list() {}
 
-	ygg_proto_list() {}
-
-	bool is_live() const;
-	ygg_string get_value() const;
-	ygg_string get_text() const;
-	ygg_string get_attribute() const;
-	ygg_string get_xml(const ygg_string &indent = ygg_term::empty) const;
-	ygg_string get_xml_attribute() const;
-	ygg_string get_sox(const ygg_string &indent) const;
-
-	void adopt_node(ygg_node X);
-	void exile_node(ygg_node X);
-
-	ygg_proto_list * adopt_child(ygg_node X_node);
-	ygg_proto_list * exile_child(ygg_node X_node);
-
-#ifdef _DEBUG
-	bool assert_otherrse_iterator rbegin() const;
+	ygg_string get_type() const;
+	ygg_string get_name() const;
+	ygg_node operator[](const ygg_string &path);
+	ygg_node operator[](const unsigned index);
+	const int get_size() const;
+	ygg_iterator begin();
+	ygg_iterator end();
+	ygg_reverse_iterator rbegin();
+	ygg_reverse_iterator rend();
+	ygg_const_iterator begin() const;
+	ygg_const_iterator end() const;
+	ygg_const_reverse_iterator rbegin() const;
 	ygg_const_reverse_iterator rend() const;
 
 	bool match_path(const ygg_string &path) const;
@@ -2181,5 +2183,6 @@ inline ygg_node ygg_root::parse_xml(const ygg_string &xml, sax_handler *sax) {
 
 /******************************************************************************
 	□■□■                  Wraith the Trickster                  □■□■
-	■□■□ 〜I'll go with heaven's advantage and fool's wisdom.〜 ■□■□
+	■□■□ ～I'll go with heaven's advantage and fool's wisdom.～ ■□■□
 ******************************************************************************/
+
